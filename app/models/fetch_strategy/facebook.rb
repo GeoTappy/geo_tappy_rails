@@ -15,9 +15,10 @@ module FetchStrategy
 
     def user_attributes
       {
-        first_name: user_data['first_name'],
-        last_name:  user_data['last_name'],
-        email:      user_data['email']
+        first_name:      user_data['first_name'],
+        last_name:       user_data['last_name'],
+        email:           user_data['email'],
+        profile_picture: user_picture
       }
     end
 
@@ -37,7 +38,8 @@ module FetchStrategy
       @user_data ||= graph.get_object('me')
     end
 
-    def picture_data
+    def user_picture
+      graph.get_picture('me', type: 'large')
     end
 
     private

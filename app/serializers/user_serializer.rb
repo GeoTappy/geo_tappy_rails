@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :access_token, :id, :email, :name, :friends
+  attributes :access_token, :id, :email, :name, :profile_picture, :friends
 
   def friends
     []
