@@ -8,7 +8,13 @@ class PushNotification
       push_options(message, options)
     )
 
+    if device_tokens.empty?
+      Rails.logger.warn "No device_tokens found, skipping push"
+      return
+    end
+
     Celluloid::Future.new do
+      Rails.logger.info "Sending push notification: #{notification.inspect}"
       ZeroPush.notify(notification).tap {|push| Rails.logger.debug push.inspect }
     end
   end
