@@ -11,7 +11,7 @@ class LocationShareService
     private
 
     def friends
-      UserFriendship.friends_for(current_user)
+      UserFriendship.where(friend_id: context.user_ids).friends_for(current_user)
     end
   end
 end
