@@ -3,9 +3,7 @@ class LocationShareService
     include Interactor
 
     def call
-      context.user_shares.to_a.select(&:persisted?).each do |user_share|
-        user_share.send_push_notification
-      end
+      context.share.send_push_notifications
     end
   end
 end

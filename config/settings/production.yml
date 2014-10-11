@@ -2,4 +2,4 @@ google:
   api_key: <%= ENV['GOOGLE_API_KEY'] %>
 
 apns:
-  auth_token: <%= ENV['ZEROPUSH_PROD_TOKEN'] %>
+  auth_token: <%= ENV['ZEROPUSH_DEV_TOKEN'] %>
