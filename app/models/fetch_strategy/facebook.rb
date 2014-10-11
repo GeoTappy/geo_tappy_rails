@@ -49,14 +49,14 @@ module FetchStrategy
       user_data.fetch('cover', {})['source']
     end
 
+    def graph
+      @graph ||= Koala::Facebook::API.new(token)
+    end
+
     private
 
     def user_data
       @user_data ||= graph.get_object('me', fields: FIELDS.join(','))
-    end
-
-    def graph
-      @graph ||= Koala::Facebook::API.new(token)
     end
   end
 end

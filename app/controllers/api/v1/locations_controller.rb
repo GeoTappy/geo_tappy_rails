@@ -10,9 +10,15 @@ module Api
       end
 
       def facebook
-        share = FacebookShare.new(current_user).post
+        share = FacebookShare.new(current_user).post(location_params)
 
         render json: { status: :ok }, status: 201
+      end
+
+      private
+
+      def location_params
+        params.require(:location).permit(:lat, :lng)
       end
     end
   end
