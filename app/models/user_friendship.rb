@@ -8,9 +8,10 @@ class UserFriendship < ActiveRecord::Base
 
   def self.create_if_new(user, friend)
     return if where(user_id: user.id, friend_id: friend.id).exists?
+    return if where(friend_id: user.id, user_id: friend.id).exists?
 
-    new(user_id: user.id, friend_id: friend.id).save
-    new(user_id: friend.id,   friend_id: user.id).save
+    new(user_id: user.id,   friend_id: friend.id).save
+    new(user_id: friend.id, friend_id: user.id).save
   end
 
   def self.remove_connections(user)
