@@ -7,6 +7,7 @@ class UserFriendship < ActiveRecord::Base
   end
 
   def self.create_if_new(user, friend)
+    return if user.id == friend.id
     return if where(user_id: user.id, friend_id: friend.id).exists?
     return if where(friend_id: user.id, user_id: friend.id).exists?
 
