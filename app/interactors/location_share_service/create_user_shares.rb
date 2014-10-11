@@ -3,8 +3,8 @@ class LocationShareService
     include Interactor
 
     def call
-      context.users       = users
-      context.user_shares = context.users.map do |user|
+      context.friends       = friends
+      context.user_shares = friends.map do |user|
         context.share.user_shares.new(user_id: user.id)
       end
       context.user_shares.each(&:save)
@@ -12,8 +12,8 @@ class LocationShareService
 
     private
 
-    def users
-      User.where(id: context.user_ids.map(&:to_i))
+    def friends
+      UserFriendship.friends_for(context.current_user)
     end
   end
 end
