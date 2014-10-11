@@ -15,9 +15,7 @@ module Api
 
       def current_user
         @current_user ||= User.where(access_token: params[:access_token]).first.tap do |u|
-          return if u.nil?
-
-          Rails.logger.info "### User: #{u.id} #{u.first_name} #{u.last_name}"
+          Rails.logger.info "### User: #{u.id} #{u.first_name} #{u.last_name}" if u.present?
         end
       end
 

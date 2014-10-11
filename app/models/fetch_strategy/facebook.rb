@@ -42,7 +42,7 @@ module FetchStrategy
     end
 
     def profile_photo_url
-      graph.get_picture('me', type: 'large')
+      graph.get_picture('me', type: 'small')
     end
 
     def cover_photo_url
