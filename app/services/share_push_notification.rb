@@ -6,7 +6,13 @@ class SharePushNotification
   end
 
   def notify
-    PushNotification.new(device_tokens).notify(share.notification_message)
+    PushNotification.new(device_tokens).notify(share.notification_message, {
+      location: {
+        lat: share.location.lat,
+        lng: share.location.lng,
+        name: share.location.place_name
+      }
+    })
   end
 
   def device_tokens
