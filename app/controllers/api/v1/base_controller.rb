@@ -14,7 +14,9 @@ module Api
       private
 
       def current_user
-        @current_user ||= User.where(access_token: params[:access_token]).first
+        @current_user ||= User.where(access_token: params[:access_token]).first.tap do |u|
+          Rails.logger.info "### User: #{u.id} #{u.first_name} #{u.last_name}"
+        end
       end
 
       def require_user
