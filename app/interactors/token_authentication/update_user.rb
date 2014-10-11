@@ -7,6 +7,9 @@ class TokenAuthentication
       user.access_token = SecureRandom.hex(16)
       user.auth_providers << auth_provider unless user.auth_providers.include?(auth_provider)
       user.save
+    rescue => e
+      Rails.logger.error e.message
+      context.fail(error: e.message)
     end
 
     private

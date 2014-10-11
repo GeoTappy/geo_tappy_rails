@@ -23,3 +23,5 @@ en:
   hello: "Hello world"
 
   current_location: "%{name} is currently near %{location}"
+
+  my_current_location: "I am now at %{place}!"

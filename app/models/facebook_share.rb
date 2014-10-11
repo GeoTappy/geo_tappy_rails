@@ -11,12 +11,19 @@ class FacebookShare
 
     graph = FetchStrategy::Facebook.new(token).graph
 
-    place = graph.search('', type: 'place', center: "#{lat},#{lng}", distance: 1000)[0]
+    places = graph.search('', type: 'place', center: "#{lat},#{lng}", distance: 1000)
 
-    graph.put_connections('me', 'feed',
-      message: "I am now at #{place['name']}!",
-      place: place['id']
-    )
+
+    if places.length > 0
+      place = places.first
+
+      graph.put_connections('me', 'feed',
+        message: I18n.t('my_current_location', place: place['name']),
+        place: place['id']
+      )
+    else
+      Rails.logger.info "No places found for #{token}, #{options}, skipping"
+    end
   rescue => e
     Rails.logger.error "Could not post to Facebook: #{e.message}"
     Rails.logger.debug e.backtrace.join("\n")
