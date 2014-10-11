@@ -6,7 +6,7 @@ class SharePushNotification
   end
 
   def notify
-    PushNotification.new(device_tokens).notify(share.title)
+    PushNotification.new(device_tokens).notify(share.notification_message)
   end
 
   def device_tokens

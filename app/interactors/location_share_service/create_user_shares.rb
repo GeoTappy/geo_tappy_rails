@@ -1,11 +1,9 @@
 class LocationShareService
-  class CreateUserShares
-    include Interactor
-
+  class CreateUserShares < BaseInteractor
     def call
       context.friends       = friends
       context.user_shares = friends.map do |user|
-        context.share.user_shares.new(user_id: user.id)
+        share.user_shares.new(user_id: user.id)
       end
       context.user_shares.each(&:save)
     end
@@ -13,7 +11,7 @@ class LocationShareService
     private
 
     def friends
-      UserFriendship.friends_for(context.current_user)
+      UserFriendship.friends_for(current_user)
     end
   end
 end

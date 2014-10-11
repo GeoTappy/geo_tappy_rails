@@ -1,7 +1,5 @@
 class LocationShareService
-  class FindPlaceForLocation
-    include Interactor
-
+  class FindPlaceForLocation < BaseInteractor
     def call
       place = places_client.spots(location.lat, location.lng).first
 
@@ -18,10 +16,6 @@ class LocationShareService
     end
 
     private
-
-    def location
-      context.new_location
-    end
 
     def places_client
       @places_client ||= GooglePlaces::Client.new(Settings.google.api_key)

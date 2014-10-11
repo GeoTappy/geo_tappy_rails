@@ -5,11 +5,8 @@ class Share < ActiveRecord::Base
 
   has_many :user_shares
 
-  def title
-    read_attribute(:title).presence || I18n.t('current_location',
-                                              name: user.first_name,
-                                              location: location.place_name
-                                             )
+  def notification_message
+    title.presence || I18n.t('current_location', name: user.first_name, location: location.place_name)
   end
 
   def send_push_notifications

@@ -1,9 +1,7 @@
 class LocationShareService
-  class SendPushNotifications
-    include Interactor
-
+  class SendPushNotifications < BaseInteractor
     def call
-      context.share.send_push_notifications
+      share.send_push_notifications
     end
   end
 end

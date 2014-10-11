@@ -1,13 +1,11 @@
 class LocationShareService
-  class SaveLocation
-    include Interactor
-
+  class SaveLocation < BaseInteractor
     def call
-      context.location.save
+      location.save
     end
 
     def rollback
-      context.location.destroy
+      location.destroy
     end
   end
 end

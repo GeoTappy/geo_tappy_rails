@@ -1,9 +1,8 @@
 class LocationShareService
-  class BuildLocation
-    include Interactor
+  class BuildLocation < BaseInteractor
 
     def call
-      context.new_location = context.share.build_location(location_params)
+      context.new_location = share.build_location(location_params)
     end
 
     private
