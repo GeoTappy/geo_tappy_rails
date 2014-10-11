@@ -18,7 +18,7 @@ module Api
       end
 
       def require_user
-        raise Unauthorized if current_user.blank?
+        raise Unauthorized if params[:access_token].blank? || current_user.blank?
       end
     end
   end

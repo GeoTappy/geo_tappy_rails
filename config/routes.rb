@@ -5,11 +5,9 @@ Rails.application.routes.draw do
       resource :profile, only: [:show]
       resource :token, only: [:create]
 
-      resources :locations, only: [:index, :show, :destroy]
+      resources :locations, only: [:index]
 
-      resources :users do
-        resources :locations, only: [:index, :show]
-      end
+      resources :users
 
       resources :location_shares, only: [:create]
     end

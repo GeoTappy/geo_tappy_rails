@@ -4,23 +4,9 @@ module Api
       before_filter :require_user
 
       def index
-        respond_with user.locations
-      end
+        locations = RecentSharedLocations.new(current_user).fetch
 
-      private
-
-      def user
-        return @user if defined?(@user)
-
-        @user = if params[:user_id].present?
-                  current_user.find_friend(params[:user_id])
-                else
-                  current_user
-                end
-      end
-
-      def location_params
-        params.require(:location).permit(:lat, :lng)
+        respond_with locations, serializer: RecentSharedLocationsSerializer, root: false
       end
     end
   end
