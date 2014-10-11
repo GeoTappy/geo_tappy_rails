@@ -1,9 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :access_token, :id, :email, :name, :profile_picture, :friends
+  attributes :id, :email, :name, :profile_picture
 
-  def friends
-    []
-  end
+  private
 
   def name
     [object.first_name, object.last_name].compact.join(' ')

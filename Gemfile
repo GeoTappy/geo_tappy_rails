@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'rails_config'
 gem 'koala'
 
+gem 'active_attr'
+
 gem 'active_model_serializers'
 
 gem "interactor", "~> 3.0"

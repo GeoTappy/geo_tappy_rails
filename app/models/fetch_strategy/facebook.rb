@@ -26,6 +26,10 @@ module FetchStrategy
       'facebook'
     end
 
+    def friends
+      graph.get_connections('me', 'friends')
+    end
+
     def email
       user_data['email']
     end

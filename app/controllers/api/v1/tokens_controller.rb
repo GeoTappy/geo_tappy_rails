@@ -22,7 +22,7 @@ module Api
 
         auth = TokenAuthentication.call(auth_params)
 
-        render json: auth.user, serializer: UserSerializer
+        render json: auth.user, serializer: ProfileSerializer
       end
 
       def auth_params
