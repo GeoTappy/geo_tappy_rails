@@ -21,12 +21,17 @@ module Api
         raise MissingProvider if auth_params[:provider].blank?
 
         auth = TokenAuthentication.call(auth_params)
+        auth.user.update_push_token(push_token) if push_token.present?
 
         render json: auth.user, serializer: ProfileSerializer
       end
 
       def auth_params
-        params.require(:auth).permit(:token, :provider)
+        params.require(:auth).permit(:token, :provider, :push_token)
+      end
+
+      def push_token
+        params[:push_token]
       end
     end
   end

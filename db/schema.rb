@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010235049) do
+ActiveRecord::Schema.define(version: 20141011004715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20141010235049) do
 
   add_index "auth_providers", ["provider"], name: "index_auth_providers_on_provider", using: :btree
   add_index "auth_providers", ["user_id"], name: "index_auth_providers_on_user_id", using: :btree
+
+  create_table "mobile_devices", force: true do |t|
+    t.string   "address"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mobile_devices", ["address"], name: "index_mobile_devices_on_address", using: :btree
+  add_index "mobile_devices", ["user_id"], name: "index_mobile_devices_on_user_id", using: :btree
 
   create_table "user_friendships", force: true do |t|
     t.integer  "user_id"
@@ -44,11 +54,12 @@ ActiveRecord::Schema.define(version: 20141010235049) do
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "profile_picture"
+    t.string   "profile_photo_url"
     t.date     "birthdate"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "access_token"
+    t.string   "cover_photo_url"
   end
 
   add_index "users", ["access_token"], name: "index_users_on_access_token", unique: true, using: :btree

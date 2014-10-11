@@ -9,16 +9,19 @@ module FetchStrategy
   class Facebook
     attr_accessor :token
 
+    FIELDS = %w[id first_name last_name email cover]
+
     def initialize(token)
       self.token = token
     end
 
     def user_attributes
       {
-        first_name:      user_data['first_name'],
-        last_name:       user_data['last_name'],
-        email:           user_data['email'],
-        profile_picture: user_picture
+        first_name:        user_data['first_name'],
+        last_name:         user_data['last_name'],
+        email:             user_data['email'],
+        profile_photo_url: profile_photo_url,
+        cover_photo_url:   cover_photo_url
       }
     end
 
@@ -38,15 +41,19 @@ module FetchStrategy
       user_data['id']
     end
 
-    def user_data
-      @user_data ||= graph.get_object('me')
-    end
-
-    def user_picture
+    def profile_photo_url
       graph.get_picture('me', type: 'large')
     end
 
+    def cover_photo_url
+      user_data.fetch('cover', {})['source']
+    end
+
     private
+
+    def user_data
+      @user_data ||= graph.get_object('me', fields: FIELDS.join(','))
+    end
 
     def graph
       @graph ||= Koala::Facebook::API.new(token)

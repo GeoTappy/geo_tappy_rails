@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :name, :profile_picture
+  attributes :id, :email, :name, :profile_photo_url
 
   private
 
