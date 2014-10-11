@@ -8,7 +8,9 @@ class PushNotification
       push_options(message, options)
     )
 
-    ZeroPush.notify(notification)
+    Celluloid::Future.new do
+      ZeroPush.notify(notification).tap {|push| Rails.logger.debug push.inspect }
+    end
   end
 
   private

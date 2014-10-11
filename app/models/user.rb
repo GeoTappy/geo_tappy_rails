@@ -30,17 +30,19 @@ class User < ActiveRecord::Base
   end
 
   def update_push_token(token)
-    token = token.to_s.gsub(' ', '')
+    Celluloid::Future.new do
+      token = token.to_s.gsub(' ', '')
 
-    if mobile_device.present?
-      if token.present? && new_token?(token)
-        ZeroPush.unregister(mobile_device.token)
-        mobile_device.update_attributes(address: token)
-        ZeroPush.register(token)
+      if mobile_device.present?
+        if token.present? && new_token?(token)
+          ZeroPush.unregister(mobile_device.token)
+          mobile_device.update_attributes(address: token)
+          ZeroPush.register(token)
+        end
+      else
+        create_mobile_device(address: token)
+        ZeroPush.register(token) if token.present?
       end
-    else
-      create_mobile_device(address: token)
-      ZeroPush.register(token) if token.present?
     end
   end
 
