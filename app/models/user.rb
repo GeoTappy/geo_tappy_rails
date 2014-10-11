@@ -33,14 +33,14 @@ class User < ActiveRecord::Base
     token = token.to_s.gsub(' ', '')
 
     if mobile_device.present?
-      if new_token?(token)
+      if token.present? && new_token?(token)
         ZeroPush.unregister(mobile_device.token)
         mobile_device.update_attributes(address: token)
         ZeroPush.register(token)
       end
     else
       create_mobile_device(address: token)
-      ZeroPush.register(token)
+      ZeroPush.register(token) if token.present?
     end
   end
 
