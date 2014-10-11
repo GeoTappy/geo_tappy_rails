@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ProfileController
+    class ProfileController < BaseController
       before_filter :require_user
 
       def show

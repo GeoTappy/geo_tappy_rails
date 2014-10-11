@@ -1,2 +1,5 @@
 google:
   api_key: ''
+
+apns:
+  auth_token: 'zvLybNtzW4rDoWQtr7qs'

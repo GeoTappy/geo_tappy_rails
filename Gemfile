@@ -27,6 +27,9 @@ gem 'interactor', '~> 3.0'
 gem 'google_places'
 gem 'geocoder'
 
+# APNS
+gem 'zero_push'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
