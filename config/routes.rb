@@ -5,7 +5,11 @@ Rails.application.routes.draw do
       resource :profile, only: [:show]
       resource :token, only: [:create]
 
-      resources :locations, only: [:index]
+      resources :locations, only: [:index] do
+        collection do
+          post :facebook
+        end
+      end
 
       resources :users
 
