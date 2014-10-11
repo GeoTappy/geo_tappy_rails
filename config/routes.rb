@@ -4,6 +4,14 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :profile, only: [:show]
       resource :token, only: [:create]
+
+      resources :locations, only: [:index, :show, :destroy]
+
+      resources :users do
+        resources :locations, only: [:index, :show]
+      end
+
+      resources :location_shares, only: [:create]
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

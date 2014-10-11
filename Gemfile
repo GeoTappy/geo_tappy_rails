@@ -21,7 +21,11 @@ gem 'active_attr'
 
 gem 'active_model_serializers'
 
-gem "interactor", "~> 3.0"
+gem 'interactor', '~> 3.0'
+
+# Google API
+gem 'google_places'
+gem 'geocoder'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

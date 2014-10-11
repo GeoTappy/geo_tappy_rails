@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   # TODO: Demo mode, user has only one device now
   has_one :mobile_device, dependent: :delete
 
+  has_many :shares
+  has_many :user_shares
+  has_many :shared_locations, through: :user_shares
+
   def self.by_email(email)
     return if email.blank?
 
