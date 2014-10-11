@@ -20,7 +20,7 @@ class LocationShareService
     private
 
     def location
-      context.location
+      context.new_location
     end
 
     def places_client

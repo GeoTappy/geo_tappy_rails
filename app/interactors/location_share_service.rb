@@ -1,6 +1,6 @@
 class LocationShareService
   include Interactor::Organizer
 
-  organize CreateShare, CreateLocation, GeocodeLocation, FindPlaceForLocation,
+  organize CreateShare, BuildLocation, GeocodeLocation, FindPlaceForLocation,
     SaveLocation, CreateUserShares, SendPushNotifications
 end
