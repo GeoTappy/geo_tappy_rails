@@ -3,17 +3,22 @@ class PushNotification
     self.device_tokens = device_tokens
   end
 
-  def notify(message, options)
-    notification = default_options.merge(options).merge(alert: message)
+  def notify(message, options = {})
+    notification = default_options.merge(
+      push_options(message, options)
+    )
 
     ZeroPush.notify(notification)
   end
 
   private
 
-  def push_options(options)
+  attr_accessor :device_tokens
+
+  def push_options(message, options)
     options.merge(
-      device_tokens: device_tokens
+      device_tokens: device_tokens,
+      alert:         message
     )
   end
 

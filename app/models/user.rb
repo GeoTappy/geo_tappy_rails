@@ -30,10 +30,23 @@ class User < ActiveRecord::Base
   end
 
   def update_push_token(token)
+    token = token.to_s.gsub(' ', '')
+
     if mobile_device.present?
-      mobile_device.update_attributes(address: token)
+      if new_token?(token)
+        ZeroPush.unregister(mobile_device.token)
+        mobile_device.update_attributes(address: token)
+        ZeroPush.register(token)
+      end
     else
       create_mobile_device(address: token)
+      ZeroPush.register(token)
     end
+  end
+
+  private
+
+  def new_token?(token)
+    mobile_device.try(:token) != token
   end
 end
