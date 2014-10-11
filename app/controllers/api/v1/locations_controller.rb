@@ -1,6 +1,8 @@
 module Api
   module V1
-    class LocationsController
+    class LocationsController < BaseController
+      before_filter :require_user
+
       def index
         respond_with user.locations
       end
@@ -11,7 +13,7 @@ module Api
         return @user if defined?(@user)
 
         @user = if params[:user_id].present?
-                  User.find(params[:user_id])
+                  current_user.find_friend(params[:user_id])
                 else
                   current_user
                 end

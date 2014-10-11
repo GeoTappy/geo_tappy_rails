@@ -1,6 +1,8 @@
 module Api
   module V1
     class LocationSharesController < BaseController
+      before_filter :require_user
+
       def create
         @share = LocationShareService.call(
           location_share_params.merge(current_user: current_user)
