@@ -8,6 +8,10 @@ class SharePushNotification
   def notify
     PushNotification.new(device_tokens).notify(share.notification_message, {
       info: {
+        sender: {
+          name: [share.user.first_name, share.user.last_name].compact.join(' '),
+          profile_photo_url: share.user.profile_photo_url
+        },
         location: {
           lat: share.location.lat,
           lng: share.location.lng,
